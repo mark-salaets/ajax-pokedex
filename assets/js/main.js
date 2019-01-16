@@ -1,72 +1,45 @@
-var name;
+
 
 $(document).ready(function() {
-  $('.search').click(function() {
-    var xhr = new XMLHttpRequest();
-    name = $('#name').val();
-    console.log(name);
 
-    xhr.open('GET', 'https://pokeapi.co/api/v2/pokemon/', true);
+  function searchPokemon() {
+    var pokeapi = "https://pokeapi.co/api/v2/pokemon/";
+    var pokemon = $("#name").val();
+    var url1 = pokeapi + pokemon + "/";
 
-    xhr.onload = function() {
-      if(this.status == 200) {
-        var api = JSON.parse(this.responseText);
-        console.log(api);
-        $('.one').text('Name: ', api.name);
-        $('.two').text('ID: '+ api.id);
-      }
-    }
-  });
-});
+    var pokeapi2 = "https://pokeapi.co/api/v2/pokemon-species/";
+    var url2 = pokeapi2 + pokemon + "/";
 
 
 
-/*
-$(document).on("keydown", function(event) {
-  if (event.keyCode == 13)
+    $.ajax({url: url1, success: function(x) {
+      console.log(x.id);
+      $(".one").html("id: " + x.id);
+      $(".two").html("name: " + x.name);
+      $(".imgOne").attr("src", x.sprites.front_default);
+      $(".m1").html("move 1: " + x.moves[0].move.name);
+      $(".m2").html("move 2: " + x.moves[1].move.name);
+      $(".m3").html("move 3: " + x.moves[2].move.name);
+      $(".m4").html("move 4: " + x.moves[3].move.name);
 
-  var xhr = new XMLHttpRequest();
-  //new XHR request
-  xhr.open('GET', 'https://pokeapi.co/api/v2/pokemon/', true);
-  xhr.onload = function() {
-    if(this.status == 200) {
-      var api = JSON.parse(this.responseText);
-      //random array
-      var result = parseInt(Math.random() * api.results.length+1);
+      $.ajax({url: url2, success: function(y) {
+        if(y.evolves_from_species != null) {
 
-      console.log(api);
+          console.log(y.evolves_from_species.name);
 
-      //data requests
-      $('h3').text(api.results[result].name);
-      $('.one').attr('href', api.results[result].url);
+        }
 
-      console.log(result);
-      console.log(api.results[result]);
-    }
-    //give new XHR address a VAR
-    var pokemonId = ('https://pokeapi.co/api/v2/pokemon/'+[result]+'/');
-      console.log(pokemonId);
-    //new XHR request
-    xhr.open('GET', pokemonId, true);
-    xhr.onload = function() {
-      if(this.status == 200) {
-        var api = JSON.parse(this.responseText);
-        console.log(api);
 
-        //data requests
-        $('.imgOne').attr('src', api.sprites.front_default);
-        $('.imgTwo').attr('src', api.sprites.back_default);
-        $('.imgThree').attr('src', api.sprites.front_shiny);
-        $('.imgFour').attr('src', api.sprites.back_shiny);
-        $('.two').text('ID: '+ api.id);
-        $('.three').text('Weight: '+ api.weight);
-        $('.four').text('Height: '+ api.height);
-        $('.five').text('Type 1: '+ api.types[0].type.name);
-        $('.six').text('Type 2: '+ api.types[1].type.name);
-      }
-    }
-    xhr.send();
-  }
-  xhr.send();
-});
-*/
+      }}); //end 2nd ajax
+
+
+    }}); //end 1st ajax
+
+
+
+  } //end searchPokemon
+
+
+
+  $(".search").click(searchPokemon);
+ });
