@@ -1,0 +1,59 @@
+﻿/* @font-face kit by Fonts2u (https://fonts2u.com) */
+@font-face {
+  font-family:"Pokemon GB";
+  src:url("../fonts/Pokemon_GB.eot?") format("eot"),url("../fonts/Pokemon_GB.woff") format("woff"),url("../fonts/Pokemon_GB.ttf") format("truetype"),url("../fonts/Pokemon_GB.svg#PokemonGB") format("svg");
+  font-weight:normal;
+  font-style:normal;
+}
+
+* {
+  font-family: "Pokemon GB";
+}
+
+.container {
+  width: 800px;
+  height: 400px;
+  margin: auto;
+  background-color: red;
+  border: 5px solid black;
+  display: flex;
+  justify-content: space-around;
+}
+
+.left {
+  flex: 1 1;
+}
+
+.right {
+  flex: 1 1;
+}
+
+.prevPokImg {
+  width: 50px;
+  height: 50px;
+}
+.imgMain {
+  position: relative;
+}
+
+.imgOne {
+  position: absolute;
+  top:0;
+  width: 200px;
+  height: 200px;
+  margin: auto;
+}
+
+.imgTwo {
+  position: absolute;
+  top:0;
+  width: 200px;
+  height: 200px;
+  margin: auto;
+}
+
+.info {
+  border: 3px black solid;
+  height: 80px;
+  text-align: center;
+}
